@@ -1,4 +1,4 @@
 package hibernate.dao.impl;
 
-public class SkillsDAOImpl {
+public class CompanyDAOImpl {
 }
