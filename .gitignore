@@ -132,3 +132,4 @@ fabric.properties
 ProjectManagementSystemHib.iml
 *.iml
 /target/
+/src/main/resources/config/
