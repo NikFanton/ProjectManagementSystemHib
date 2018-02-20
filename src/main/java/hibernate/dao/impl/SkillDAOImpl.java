@@ -2,36 +2,65 @@ package hibernate.dao.impl;
 
 import hibernate.dao.SkillDAO;
 import hibernate.entities.Skill;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class SkillsDAOImpl implements SkillDAO {
+public class SkillDAOImpl implements SkillDAO {
     SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
     @Override
     public void add(Skill skill) {
-
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.save(skill);
+        transaction.commit();
+        session.close();
     }
 
     @Override
     public Skill getById(Long id) {
-        return null;
+        Session session = sessionFactory.openSession();
+        Skill skill = session.get(Skill.class, id);
+        session.close();
+        return skill;
     }
 
     @Override
     public List<Skill> getAll() {
-        return null;
+        Session session = this.sessionFactory.openSession();
+        Query query = session.createQuery("FROM Skill");
+        List result = query.list();
+        session.close();
+        return result;
     }
 
     @Override
     public void update(Skill skill) {
-
+        Session session = this.sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(skill);
+        transaction.commit();
+        session.close();
     }
 
     @Override
     public void delete(Long id) {
+        Session session = this.sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        Skill skill = session.get(Skill.class, id);
+        session.delete(skill);
+        transaction.commit();
+        session.close();
+    }
 
+    public static void main(String[] args) {
+        SkillDAOImpl skillDAO = new SkillDAOImpl();
+        skillDAO.getAll().forEach(skill -> System.out.println(skill));
+        skillDAO.sessionFactory.close();
     }
 }
