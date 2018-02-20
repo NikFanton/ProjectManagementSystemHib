@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="connection.characterEncoding">UTF-8</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost/itsdb</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+		<!-- Вивід SQL запитів в консоль -->
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+
+		<!-- Автоматичне створення і оновлення структури БД -->
+		<property name="hibernate.hbm2ddl.auto">update</property>
+
+		<!-- Mapping -->
+		<mapping class="hibernate.entities.Project"/>
+		<mapping class="hibernate.entities.Company"/>
+		<mapping class="hibernate.entities.Customer"/>
+		<mapping class="hibernate.entities.Developer"/>
+		<mapping class="hibernate.entities.Skill"/>
+	</session-factory>
+</hibernate-configuration>
