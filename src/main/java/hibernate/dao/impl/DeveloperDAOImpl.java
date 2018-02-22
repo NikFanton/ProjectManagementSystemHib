@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 public class DeveloperDAOImpl implements DeveloperDAO {
-    SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+    public SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
     @Override
     public void add(Developer developer) {
@@ -22,6 +22,9 @@ public class DeveloperDAOImpl implements DeveloperDAO {
         session.save(developer);
         if (developer.getSkills() != null) {
             developer.getSkills().forEach(skill -> session.saveOrUpdate(skill));
+        }
+        if (developer.getProjects() != null) {
+            developer.getProjects().forEach(project -> session.saveOrUpdate(project));
         }
         transaction.commit();
         session.close();
@@ -62,22 +65,9 @@ public class DeveloperDAOImpl implements DeveloperDAO {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         Developer developer = session.get(Developer.class, id);
+        developer.setProjects(null);
         session.delete(developer);
         transaction.commit();
         session.close();
-    }
-
-    public static void main(String[] args) {
-        DeveloperDAOImpl developerDAO = new DeveloperDAOImpl();
-//        Developer developer = developerDAO.getById(34L);
-//        Set<Skill> skills = new HashSet<>();
-//        skills.add(new Skill("test1", "middle"));
-//        skills.add(new Skill("test2", "junior"));
-//        developer.setSkills(skills);
-//        developer.setName("Test - OK");
-//        developerDAO.add(developer);
-//        developerDAO.delete(35L);
-        developerDAO.getAll().forEach(d -> System.out.println(d));
-        developerDAO.sessionFactory.close();
     }
 }

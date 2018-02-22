@@ -13,7 +13,7 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class CompanyDAOImpl implements CompanyDAO {
-    private SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+    public SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
     @Override
     public void add(Company company) {
@@ -62,11 +62,5 @@ public class CompanyDAOImpl implements CompanyDAO {
         session.delete(company);
         transaction.commit();
         session.close();
-    }
-
-    public static void main(String[] args) {
-        CompanyDAOImpl companyDAO = new CompanyDAOImpl();
-        companyDAO.getAll().forEach(System.out::println);
-        companyDAO.sessionFactory.close();
     }
 }

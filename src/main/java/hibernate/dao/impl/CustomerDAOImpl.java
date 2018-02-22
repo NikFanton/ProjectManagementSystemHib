@@ -11,7 +11,7 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class CustomerDAOImpl implements CustomerDAO {
-    private SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+    public SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
     @Override
     public void add(Customer customer) {
@@ -61,11 +61,5 @@ public class CustomerDAOImpl implements CustomerDAO {
         session.delete(customer);
         transaction.commit();
         session.close();
-    }
-
-    public static void main(String[] args) {
-        CustomerDAOImpl customerDAO = new CustomerDAOImpl();
-        customerDAO.getAll().forEach(System.out::println);
-        customerDAO.sessionFactory.close();
     }
 }

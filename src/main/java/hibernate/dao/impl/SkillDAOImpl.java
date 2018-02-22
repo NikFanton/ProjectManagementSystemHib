@@ -11,7 +11,7 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class SkillDAOImpl implements SkillDAO {
-    SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+    public SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
     @Override
     public void add(Skill skill) {
@@ -56,11 +56,5 @@ public class SkillDAOImpl implements SkillDAO {
         session.delete(skill);
         transaction.commit();
         session.close();
-    }
-
-    public static void main(String[] args) {
-        SkillDAOImpl skillDAO = new SkillDAOImpl();
-        skillDAO.getAll().forEach(skill -> System.out.println(skill));
-        skillDAO.sessionFactory.close();
     }
 }

@@ -43,7 +43,7 @@ public class Developer {
     @JoinTable(name = "developers_projects",
                 joinColumns = @JoinColumn(name = "id_developer"),
                 inverseJoinColumns = @JoinColumn(name = "id_project"))
-    private Set<Project> projects = new HashSet<>(0);
+    private Set<Project> projects;
 
     public Developer() {
     }

@@ -12,11 +12,11 @@
 		<property name="hibernate.connection.password">root</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 
-		<!-- Вивід SQL запитів в консоль -->
-		<property name="show_sql">true</property>
-		<property name="format_sql">true</property>
+		<!-- Print SQL query in console -->
+		<property name="show_sql">false</property>
+		<property name="format_sql">false</property>
 
-		<!-- Автоматичне створення і оновлення структури БД -->
+
 		<property name="hibernate.hbm2ddl.auto">update</property>
 
 		<!-- Mapping -->

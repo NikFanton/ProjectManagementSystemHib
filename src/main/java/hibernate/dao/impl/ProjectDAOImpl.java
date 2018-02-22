@@ -11,7 +11,7 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class ProjectDAOImpl implements ProjectDAO {
-    private SessionFactory sessionFactory;
+    public SessionFactory sessionFactory;
 
     public ProjectDAOImpl() {
         sessionFactory = new Configuration().configure().buildSessionFactory();
@@ -66,6 +66,12 @@ public class ProjectDAOImpl implements ProjectDAO {
         if (project.getCompany() != null) {
             session.saveOrUpdate(project.getCompany());
         }
+        if (project.getDevelopers() != null) {
+            System.out.println("===");
+            project.getDevelopers().forEach(System.out::println);
+            System.out.println("===");
+            project.getDevelopers().forEach(developer -> session.saveOrUpdate(developer));
+        }
         transaction.commit();
         session.close();
     }
@@ -75,19 +81,9 @@ public class ProjectDAOImpl implements ProjectDAO {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         Project project = session.get(Project.class, id);
+        project.setDevelopers(null);
         session.delete(project);
         transaction.commit();
         session.close();
-    }
-
-    public static void main(String[] args) {
-        ProjectDAOImpl projectDAO = new ProjectDAOImpl();
-//        projectDAO.add(new Project("test", 10000, new Customer("customer test"), null));
-//        Project project = projectDAO.getById(26L);
-//        project.setProjectName("Test OK");
-//        projectDAO.update(project);
-//        projectDAO.delete(32L);
-        projectDAO.getAll().forEach(p -> System.out.println(p));
-        projectDAO.sessionFactory.close();
     }
 }

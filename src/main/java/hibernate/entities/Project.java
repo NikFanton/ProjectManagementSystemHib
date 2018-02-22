@@ -35,7 +35,7 @@ public class Project {
             cascade = {CascadeType.MERGE},
             mappedBy = "projects",
             targetEntity = Developer.class)
-    private Set<Developer> developers = new HashSet<>(0);
+    private Set<Developer> developers;
 
     public Project() {
     }
