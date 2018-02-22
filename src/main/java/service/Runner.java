@@ -167,10 +167,5 @@ public class Runner {
             }
         } while (choice != 0);
         System.exit(0);
-//        companyDAO.sessionFactory.close();
-//        customerDAO.sessionFactory.close();
-//        developerDAO.sessionFactory.close();
-//        companyDAO.sessionFactory.close();
-//        skillDAO.sessionFactory.close();
     }
 }
