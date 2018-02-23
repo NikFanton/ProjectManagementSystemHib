@@ -1,6 +1,5 @@
-package service;
+package application;
 
-import hibernate.dao.DAOBase;
 import hibernate.dao.impl.*;
 import hibernate.entities.*;
 
